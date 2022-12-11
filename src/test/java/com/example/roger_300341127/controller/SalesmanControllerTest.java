@@ -57,7 +57,7 @@ class SalesmanControllerTest {
         String sDate1 = "2022/11/11";
         Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse(sDate1);
 
-        salesman.setDate(date1);
+        salesman.setDot(date1);
         salesman.setItem("Washing Machine");
 
         MockitoAnnotations.openMocks(this);
@@ -66,7 +66,7 @@ class SalesmanControllerTest {
     }
 
     @Test
-    public void findAll_ListView() throws Exception {
+    public void displayTest() throws Exception {
         List<Salesman> list = new ArrayList<>();
         list.add(salesman);
         list.add(salesman);
@@ -84,7 +84,7 @@ class SalesmanControllerTest {
 
 
     @Test
-    void saveSalesman() throws Exception {
+    void addTest() throws Exception {
         when(salesmanRepository.save(salesman)).thenReturn(salesman);
         salesmanRepository.save(salesman);
         verify(salesmanRepository, times(1)).save(salesman);
@@ -99,5 +99,5 @@ class SalesmanControllerTest {
 
         verify(salesmanRepository, times(1)).deleteById(1L);
     }
-    
+
 }

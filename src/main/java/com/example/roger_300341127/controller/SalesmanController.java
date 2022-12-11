@@ -17,6 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class SalesmanController {
 
+    //GitHub link to repository:
+//    https://github.com/rogerau/Roger_300341127_CSIS3275
     @Autowired
     private SalesmanRepository sRepo;
 

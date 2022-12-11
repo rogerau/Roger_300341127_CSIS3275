@@ -23,7 +23,7 @@ public class Salesman {
     private double amount;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private Date dot;
     private String item;
     private String name;
 }
