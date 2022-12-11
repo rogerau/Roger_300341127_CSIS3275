@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>List Salesman Data</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h2>Final Exam Set B</h2>
+    <h3>Sales Summary Table</h3>
+    <hr/>
+    <table class="table table-bordered table-striped" id="salesmanTableSummary">
+        <thead>
+        <tr>
+            <th> Salesman name</th>
+            <th> Washing Machine</th>
+            <th> Refrigerator</th>
+            <th> Music System</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s:${salesmanList}">
+            <td th:text="${s.getName()}"></td>
+            <td>
+                <span th:if="${s.getItem()} == 'Washing Machine'" th:text="${s.getAmount()}"/>
+                <span th:unless="${s.getItem()} == 'Washing Machine'" th:text="0"/>
+            </td>
+            <td>
+                <span th:if="${s.getItem()} == 'Refrigerator'" th:text="${s.getAmount()}"/>
+                <span th:unless="${s.getItem()} == 'Refrigerator'" th:text="0"/>
+            </td>
+            <td>
+                <span th:if="${s.getItem()} == 'Music System'" th:text="${s.getAmount()}"/>
+                <span th:unless="${s.getItem()} == 'Music System'" th:text="0"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<hr/>
+
+<div class="container">
+    <h3>List Salesman Data</h3>
+    <table class="table table-bordered table-striped" id="salesmanTable">
+        <thead>
+        <tr>
+            <th> Transaction Code</th>
+            <th> Salesman</th>
+            <th> Item</th>
+            <th> Amount</th>
+            <th> Transaction Date</th>
+            <th> Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s:${salesmanList}">
+            <td th:text="${s.getId()}"></td>
+            <td th:text="${s.getName()}"></td>
+            <td th:text="${s.getItem()}"></td>
+            <td th:text="${s.getAmount()}"></td>
+            <td th:text="${s.getDate()}"></td>
+            <td><a th:href="@{/showDeleteForm(id=${s.id})}"
+                   onclick="return confirm('Are you sure you want to delete the record?')"
+                   class="btn btn-danger">Delete</a>
+                <a th:href="@{/showUpdateForm(id=${s.id})}"
+                   onclick="return confirm('Are you sure you want to edit the record?')"
+                   class="btn btn-success">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/addSalesmanForm}" class="btn btn-primary mb-2">Add Salesman</a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.25/datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#salesmanTable").DataTable({
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1]
+                }]
+            });
+        })
+        $(document).ready(function () {
+            $("#salesmanTableSummary").DataTable({
+                'aoColumnDefs': [{
+                    'bSortable': false,
+                    'aTargets': [-1]
+                }]
+            });
+        })
+
+
+    </script>
+</div>
+</body>
+</html>

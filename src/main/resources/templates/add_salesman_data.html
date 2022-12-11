@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Add Salesman</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+</head>
+<body>
+
+<div class="container">
+    <h2>Add Salesman Data</h2>
+    <hr/>
+    <form name="salesman_form" th:action="@{/saveSalesman}" onsubmit="return validateForm()" th:object="${salesman}"
+          method="POST">
+        <div id="name_detail">
+            <label for="name">Salesman Name:</label>
+            <input class="form-control col-4 mb-4" type="text" name="name" id="name"
+                   th:field="*{name}">
+        </div>
+
+        <div id="item_type_detail">
+            <label for="item_type">Item Type</label>
+            <select id="item_type" size="4" th:field="*{item}">
+                <option value="default" selected></option>
+                <option value="Washing Machine">Washing Machine</option>
+                <option value="Refrigerator">Refrigerator</option>
+                <option value="Music System">Music System</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="s_amount">Sales amount:</label>
+            <input class="form-control col-4 mb-4" type="number" id="s_amount" name="s_amount"
+                   th:field="*{amount}">
+        </div>
+        <div>
+            <label for="delivery_time">Transaction Date</label>
+            <input type="date" id="delivery_time" name="delivery_time" th:field="*{date}">
+        </div>
+        <div>
+            <input type="hidden" th:field="*{id}">
+        </div>
+        </br>
+        <button type="submit" class="btn-primary" onclick="checkInputs()" th:href=" @{
+        /showSalesman}">Save
+        </button>
+    </form>
+    <a th:href="@{/showSalesman}">Return to list</a>
+</div>
+
+<script>
+    function validateForm() {
+        if (document.forms["salesman_form"]["name"].value == "") {
+            alert("Please insert name!");
+            return false;
+        }
+
+        if (document.forms["salesman_form"]["item"].value == "") {
+            alert("Please select item!");
+            return false;
+        }
+
+        if (document.forms["salesman_form"]["s_amount"].value == 0) {
+            alert("Please insert amount!");
+            return false;
+        }
+
+        if (document.forms["salesman_form"]["delivery_time"].value == "") {
+            alert("Please select date!");
+            return false;
+        }
+
+    }
+</script>
+</body>
+</html>
